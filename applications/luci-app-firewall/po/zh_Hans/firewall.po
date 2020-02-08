@@ -322,6 +322,10 @@ msgstr "丢弃无效数据包"
 msgid "Enable"
 msgstr "启用"
 
+#: applications/luci-app-firewall/htdocs/luci-static/resources/view/firewall/zones.js:73
+msgid "Enable FullCone-NAT"
+msgstr "启用 FullCone-NAT"
+
 #: applications/luci-app-firewall/htdocs/luci-static/resources/view/firewall/forwards.js:302
 msgid "Enable NAT Loopback"
 msgstr "启用 NAT 环回"
