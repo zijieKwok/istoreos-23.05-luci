@@ -5567,6 +5567,10 @@ msgstr "多播路由"
 msgid "Multicast to unicast"
 msgstr "多播到单播"
 
+#: modules/luci-base/root/usr/share/luci/menu.d/luci-base.json:45
+msgid "NAS"
+msgstr "网络存储"
+
 #: modules/luci-mod-network/htdocs/luci-static/resources/view/network/wireless.js:1557
 msgid "NAS ID"
 msgstr "NAS ID"
