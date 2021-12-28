@@ -8735,6 +8735,9 @@ msgstr "是"
 msgid "« Back"
 msgstr "« 后退"
 
+msgid "NAS"
+msgstr "网络存储"
+
 #~ msgid "Enable promiscious mode"
 #~ msgstr "启用混杂模式"
 
