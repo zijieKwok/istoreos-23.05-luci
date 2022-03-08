@@ -50,6 +50,11 @@ if nixio.fs.access("/usr/bin/dockerd") then
 	o.placeholder = translate("Example: https://hub-mirror.c.163.com")
 	o:depends("remote_endpoint", 0)
 
+	o = s:option(Value, "max_concurrent_downloads", translate("Max Concurrent Downloads"), translate("Set threads for docker pull, 0 means default"))
+	o.placeholder = 0
+	o.datatype = "uinteger"
+	o:depends("remote_endpoint", 0)
+
 	o = s:option(ListValue, "log_level",
 		translate("Log Level"),
 		translate('Set the logging level'))
