@@ -50,6 +50,8 @@ LUCI_LANG.uk=Українська (Ukrainian)
 LUCI_LANG.vi=Tiếng Việt (Vietnamese)
 LUCI_LANG.zh_Hans=简体中文 (Chinese Simplified)
 LUCI_LANG.zh_Hant=繁體中文 (Chinese Traditional)
+LUCI_LANG.zh-cn=$(LUCI_LANG.zh_Hans)
+LUCI_LANG.zh-tw=$(LUCI_LANG.zh_Hant)
 
 # Submenu titles
 LUCI_MENU.col=1. Collections
