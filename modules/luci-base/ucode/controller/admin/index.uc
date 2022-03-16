@@ -1,6 +1,7 @@
 // Copyright 2022 Jo-Philipp Wich <jo@mein.io>
 // Licensed to the public under the Apache License 2.0.
 
+import { open, stat } from 'fs';
 import { load_catalog, change_catalog, get_translations } from 'luci.core';
 
 const ubus_types = [
@@ -122,6 +123,28 @@ return {
 	},
 
 	action_translations: function(reqlang) {
+		const mtimefile = '/tmp/luci-i18n-mtime';
+
+		if (reqlang != null) {
+			let _ts = http.formvalue('_ts');
+			if (_ts != null) {
+				http.header('Cache-Control', 'public, max-age=31536000');
+				http.header('ETag', _ts);
+			} else {
+				let s = stat(mtimefile);
+				if (s == null) {
+					let fd = open(mtimefile, 'w+x', 0600);
+					if (fd != null) {
+						fd.close();
+					}
+					s = stat(mtimefile);
+				}
+				_ts = `${s.inode}-${s.mtime}`;
+				http.redirect(dispatcher.build_url(...ctx.request_path) + '?_ts=' + _ts);
+				return;
+			}
+		}
+
 		if (reqlang != null && reqlang != dispatcher.lang) {
 			load_catalog(reqlang, '/usr/lib/lua/luci/i18n');
 			change_catalog(reqlang);
