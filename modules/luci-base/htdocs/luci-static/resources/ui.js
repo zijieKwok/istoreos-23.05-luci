@@ -3064,13 +3064,9 @@ var UIMenu = baseclass.singleton(/** @lends LuCI.ui.menu.prototype */ {
 	 * Returns a promise resolving to the root element of the menu tree.
 	 */
 	load: function() {
-		if (this.menu == null)
-			this.menu = session.getLocalData('menu');
-
 		if (!L.isObject(this.menu)) {
 			this.menu = request.get(L.url('admin/menu')).then(L.bind(function(menu) {
 				this.menu = scrubMenu(menu.json());
-				session.setLocalData('menu', this.menu);
 
 				return this.menu;
 			}, this));
