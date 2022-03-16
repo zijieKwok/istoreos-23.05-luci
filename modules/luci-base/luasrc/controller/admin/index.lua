@@ -24,17 +24,33 @@ function action_logout()
 end
 
 function action_translations(lang)
+	local dsp = require "luci.dispatcher"
 	local i18n = require "luci.i18n"
 	local http = require "luci.http"
 	local fs = require "nixio".fs
+	local nixio = require "nixio"
+	local mtimefile = "/tmp/luci-i18n-mtime"
+
+	local _ts = luci.http.formvalue("_ts")
 
 	if lang and #lang > 0 then
+		local lang_req = lang
 		lang = i18n.setlanguage(lang)
 		if lang then
-			local s = fs.stat("%s/base.%s.lmo" %{ i18n.i18ndir, lang })
-			if s then
+			if _ts then
 				http.header("Cache-Control", "public, max-age=31536000")
-				http.header("ETag", "%x-%x-%x" %{ s["ino"], s["size"], s["mtime"] })
+				http.header("ETag", _ts)
+			else
+				local s = fs.stat(mtimefile)
+				if not s then
+					local oflags = nixio.open_flags("rdwr", "creat")
+					local mfile, code, msg = nixio.open(mtimefile, oflags)
+					s = mfile:stat()
+					mfile:close()
+				end
+				_ts = "%x-%x" % {s["ino"], s["mtime"]}
+				http.redirect("%s/%s?_ts=%s" % { dsp.build_url("admin/translations"), lang_req, _ts })
+				return
 			end
 		end
 	end
