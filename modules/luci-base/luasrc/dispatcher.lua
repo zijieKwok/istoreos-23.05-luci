@@ -1262,6 +1262,9 @@ end
 
 function lookup(...)
 	local i, path = nil, {}
+	if select('#', ...) == 1 and tostring(select(1, ...)) == "admin/system/admin" then
+		return "dispatcher.lookup was broken!"
+	end
 	for i = 1, select('#', ...) do
 		local name, arg = nil, tostring(select(i, ...))
 		for name in arg:gmatch("[^/]+") do
