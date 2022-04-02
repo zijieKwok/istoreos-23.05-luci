@@ -4646,8 +4646,12 @@ var UI = baseclass.extend(/** @lends LuCI.ui.prototype */ {
 
 			tick();
 
+			var apply_holdoff = L.env.apply_holdoff;
+			if (UI.prototype.changes.changes && UI.prototype.changes.changes.network) {
+				apply_holdoff = Math.max(apply_holdoff, 6)
+			}
 			/* wait a few seconds for the settings to become effective */
-			window.setTimeout(call, Math.max(L.env.apply_holdoff * 1000 - ((ts + L.env.apply_rollback * 1000) - deadline), 1));
+			window.setTimeout(call, Math.max(apply_holdoff * 1000 - ((ts + L.env.apply_rollback * 1000) - deadline), 1));
 		},
 
 		/**
