@@ -4180,11 +4180,11 @@ var UI = baseclass.extend(/** @lends LuCI.ui.prototype */ {
 							method: 'post',
 							timeout: L.env.apply_timeout * 1000,
 							query: { sid: L.env.sessionid, token: L.env.token }
-						}).then(call);
+						}).then(call, function(){call({ status: 0 }, null, 0)});
 					}, delay);
 				};
 
-				call({ status: 0 });
+				call({ status: 0 }, null, 0);
 			}
 			else {
 				this.displayStatus('warning', [
