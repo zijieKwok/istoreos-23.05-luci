@@ -188,11 +188,17 @@ return view.extend({
 		ddns_toggle.innerHTML = status['_enabled'] ? _('Stop DDNS') : _('Start DDNS')
 		services_list.innerHTML = status['_services_list'];
 
+		dom.content(services_list, function() {
+			return E([], [
+				E('div', {}, E('button', {'class' : 'cbi-button cbi-button-button', 'disabled' : 'true'}, status['_services_list'])),]);
+		});
+
 		dom.content(ddns_enabled, function() {
 			return E([], [
-				E('div', {}, status['_enabled'] ? _('DDNS Autostart enabled') : [
-					_('DDNS Autostart disabled'),
-					E('div', { 'class' : 'cbi-value-description' },
+				E('div', {}, [
+					E('button', {'class' : 'cbi-button cbi-button-button', 'disabled' : 'true'}, status['_enabled'] ? _('DDNS Autostart enabled') :
+						_('DDNS Autostart disabled')),
+					status['_enabled']?"":E('div', { 'class' : 'cbi-value-description' },
 					_("Currently DDNS updates are not started at boot or on interface events.") + "<br />" +
 					_("This is the default if you run DDNS scripts by yourself (i.e. via cron with force_interval set to '0')"))
 				]),]);
@@ -262,20 +268,19 @@ return view.extend({
 		s.tab('info', _('Information'));
 		s.tab('global', _('Global Settings'));
 
-		o = s.taboption('info', form.DummyValue, '_version', _('Dynamic DNS Version'));
-		o.cfgvalue = function() {
-			return status[this.option];
-		};
+		o = s.taboption('info', form.Button, '_version', _('Dynamic DNS Version'));
+		o.inputtitle = status['_version'];
+		o.readonly = true;
 
-		o = s.taboption('info', form.DummyValue, '_enabled', _('State'));
-		o.cfgvalue = function() {
-			var res = status[this.option];
-			if (!res) {
-				this.description = _("Currently DDNS updates are not started at boot or on interface events.") + "<br />" +
-				_("This is the default if you run DDNS scripts by yourself (i.e. via cron with force_interval set to '0')")
-			}
-			return res ? _('DDNS Autostart enabled') : _('DDNS Autostart disabled')
-		};
+		o = s.taboption('info', form.Button, '_enabled', _('State'));
+		if (!status['_enabled']) {
+			o.description = _("Currently DDNS updates are not started at boot or on interface events.") + "<br />" +
+			_("This is the default if you run DDNS scripts by yourself (i.e. via cron with force_interval set to '0')");
+			o.inputtitle = _('DDNS Autostart disabled');
+		} else {
+			o.inputtitle = _('DDNS Autostart enabled');
+		}
+		o.readonly = true;
 
 		o = s.taboption('info', form.Button, '_toggle');
 		o.title      = '&#160;';
@@ -289,10 +294,9 @@ return view.extend({
 		o.inputstyle = 'apply';
 		o.onclick = L.bind(this.handleRestartDDns, this, m);
 
-		o = s.taboption('info', form.DummyValue, '_services_list', _('Services list last update'));
-		o.cfgvalue = function() {
-			return status[this.option];
-		};
+		o = s.taboption('info', form.Button, '_services_list', _('Services list last update'));
+		o.inputtitle = status['_services_list'];
+		o.readonly = true;
 
 		o = s.taboption('info', form.Button, '_refresh_services');
 		o.title      = '&#160;';
