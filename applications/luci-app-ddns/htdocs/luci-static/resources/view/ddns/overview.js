@@ -567,11 +567,10 @@ return view.extend({
 					'title': _('Stop this service'),
 				};
 
-			if (status['_enabled'] == 0 || cfg_enabled == 0)
+			if (cfg_enabled == 0)
 				reload_opt['disabled'] = 'disabled';
 
-			if (!resolved[section_id] || !resolved[section_id].pid ||
-					(resolved[section_id].pid && cfg_enabled == '1'))
+			if (!resolved[section_id] || !resolved[section_id].pid || cfg_enabled == 1)
 				stop_opt['disabled'] = 'disabled';
 
 			dom.content(tdEl.lastChild, [
