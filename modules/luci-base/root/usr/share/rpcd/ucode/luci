@@ -530,7 +530,13 @@ const methods = {
 
 	getConntrackList: {
 		call: function() {
-			return { result: conntrack_list() };
+			let conntrack = conntrack_list();
+			const count = length(conntrack);
+			if (count > 1000) {
+				sort(conntrack, function(a, b) {return b.packets - a.packets;});
+				conntrack = slice(conntrack, 0, 1000);
+			}
+			return { result: conntrack, count: count };
 		}
 	},
 
