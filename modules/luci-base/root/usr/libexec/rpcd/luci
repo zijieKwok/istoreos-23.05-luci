@@ -600,7 +600,17 @@ local methods = {
 	getConntrackList = {
 		call = function()
 			local sys = require "luci.sys"
-			return { result = sys.net.conntrack() }
+			local conntrack = sys.net.conntrack()
+			local count = #conntrack
+			if count > 1000 then
+				table.sort(conntrack, function(a, b) return a.packets > b.packets end)
+				local newtable = {}
+				for i = 1, 1000 do
+					newtable[i] = conntrack[i]
+				end
+				conntrack = newtable
+			end
+			return { result = conntrack , count = count }
 		end
 	},
 
