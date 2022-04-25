@@ -4253,7 +4253,7 @@ var UI = baseclass.extend(/** @lends LuCI.ui.prototype */ {
 			tick();
 
 			var apply_holdoff = L.env.apply_holdoff;
-			if (UI.prototype.changes.changes.network) {
+			if (UI.prototype.changes.changes && UI.prototype.changes.changes.network) {
 				apply_holdoff = Math.max(apply_holdoff, 6)
 			}
 			/* wait a few seconds for the settings to become effective */
