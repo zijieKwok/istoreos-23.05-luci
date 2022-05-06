@@ -8730,3 +8730,9 @@ msgstr ""
 
 msgid "NAS"
 msgstr "网络存储"
+
+msgid "CNAME records"
+msgstr "CNAME记录"
+
+msgid "Target hostname"
+msgstr "目标主机名"

@@ -45,6 +45,19 @@ return view.extend({
 			o.value(ipv4, '%s (%s)'.format(ipv4, ipaddrs[ipv4]));
 		});
 
+		s = m.section(form.TableSection, 'cname', _('CNAME records'));
+		s.addremove = true;
+		s.anonymous = true;
+		s.sortable  = true;
+
+		o = s.option(form.Value, 'cname', _('Hostname'));
+		o.datatype = 'hostname';
+		o.rmempty = true;
+
+		o = s.option(form.Value, 'target', _('Target hostname'));
+		o.datatype = 'hostname';
+		o.rmempty = true;
+
 		return m.render();
 	}
 });
