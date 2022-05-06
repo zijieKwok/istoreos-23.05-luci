@@ -260,6 +260,7 @@ return view.extend({
 		s.tab('advanced', _('Advanced Settings'));
 		s.tab('leases', _('Static Leases'));
 		s.tab('hosts', _('Hostnames'));
+		s.tab('cnames', _('CNAME'));
 		s.tab('srvhosts', _('SRV'));
 		s.tab('mxhosts', _('MX'));
 		s.tab('ipsets', _('IP Sets'));
@@ -727,6 +728,23 @@ return view.extend({
 		L.sortedKeys(ipaddrs, null, 'addr').forEach(function(ipv4) {
 			so.value(ipv4, '%s (%s)'.format(ipv4, ipaddrs[ipv4]));
 		});
+
+		o = s.taboption('cnames', form.SectionValue, '__cnames__', form.GridSection, 'cname', null,
+			_('CNAME records are used to map a domain name to another domain name.'));
+
+		ss = o.subsection;
+
+		ss.addremove = true;
+		ss.anonymous = true;
+		ss.sortable  = true;
+
+		so = ss.option(form.Value, 'cname', _('Hostname'));
+		so.datatype = 'hostname';
+		so.rmempty = true;
+
+		so = ss.option(form.Value, 'target', _('Target hostname'));
+		so.datatype = 'hostname';
+		so.rmempty = true;
 
 		o = s.taboption('ipsets', form.SectionValue, '__ipsets__', form.GridSection, 'ipset', null,
 			_('List of IP sets to populate with the IPs of DNS lookup results of the FQDNs also specified here.'));

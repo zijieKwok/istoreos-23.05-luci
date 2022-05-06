@@ -1323,9 +1323,17 @@ msgstr "CA 证书，如果留空，则证书将在第一次连接后被保存。
 msgid "CLAT configuration failed"
 msgstr "CLAT 配置失败"
 
+#: modules/luci-mod-network/htdocs/luci-static/resources/view/network/dhcp.js:263
+msgid "CNAME"
+msgstr "CNAME"
+
 #: modules/luci-mod-network/htdocs/luci-static/resources/view/network/dhcp.js:650
 msgid "CNAME or fqdn"
 msgstr "CNAME 或 fqdn"
+
+#: modules/luci-mod-network/htdocs/luci-static/resources/view/network/dhcp.js:733
+msgid "CNAME records are used to map a domain name to another domain name."
+msgstr "CNAME 记录用于将一个域名映射到另一个域名"
 
 #: modules/luci-mod-status/htdocs/luci-static/resources/view/status/processes.js:72
 msgid "CPU usage (%)"
@@ -8336,6 +8344,10 @@ msgstr "目标"
 #: modules/luci-mod-status/htdocs/luci-static/resources/view/status/include/10_system.js:57
 msgid "Target Platform"
 msgstr "目标平台"
+
+#: modules/luci-mod-network/htdocs/luci-static/resources/view/network/dhcp.js:745
+msgid "Target hostname"
+msgstr "目标主机名"
 
 #: protocols/luci-proto-vpnc/htdocs/luci-static/resources/protocol/vpnc.js:103
 msgid "Target network"
