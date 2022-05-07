@@ -161,7 +161,7 @@ return view.extend({
 
 	HandleStopDDnsRule: function(m, section_id, ev) {
 		return fs.exec('/usr/lib/ddns/dynamic_dns_lucihelper.sh',
-							[ '-S', section_id, '--', 'start' ])
+							[ '-S', section_id, '--', 'stop' ])
 			.then(L.bind(m.render, m))
 			.catch(function(e) { ui.addNotification(null, E('p', e.message)) });
 	},
@@ -179,7 +179,7 @@ return view.extend({
 			.then(L.bind(m.render, m));
 	},
 
-	poll_status: function(map, data) {
+	poll_status: function(map, resolved, data) {
 		var status = data[1] || [], service = data[0] || [], rows = map.querySelectorAll('.cbi-section-table-row[data-sid]'),
 			section_id, cfg_detail_ip, cfg_update, cfg_status, host, ip, last_update,
 			next_update, service_status, reload, cfg_enabled, stop,
@@ -224,13 +224,17 @@ return view.extend({
 			service_status = '<b>' + _('Not Running') + '</b>';
 
 			if (service[section_id]) {
-				stop.disabled = (!service[section_id].pid || (service[section_id].pid && cfg_enabled == '1'));
+				stop.disabled = !service[section_id].pid;
+				var update = resolved[section_id] || {};
+				update.pid = service[section_id].pid;
 				if (service[section_id].ip)
-					ip = service[section_id].ip;
+					ip = update.ip = service[section_id].ip;
 				if (service[section_id].last_update)
-					last_update = service[section_id].last_update;
-				if (service[section_id].next_update)
+					last_update = update.last_update = service[section_id].last_update;
+				if (service[section_id].next_update) {
+					update.next_update = service[section_id].next_update;
 					next_update = this.NextUpdateStrings[service[section_id].next_update] || service[section_id].next_update;
+				}
 				if (service[section_id].pid)
 					service_status = '<b>' + _('Running') + '</b> : ' + service[section_id].pid;
 			}
@@ -571,7 +575,7 @@ return view.extend({
 			if (cfg_enabled == 0)
 				reload_opt['disabled'] = 'disabled';
 
-			if (!resolved[section_id] || !resolved[section_id].pid || cfg_enabled == 1)
+			if (!resolved[section_id] || !resolved[section_id].pid)
 				stop_opt['disabled'] = 'disabled';
 
 			dom.content(tdEl.lastChild, [
@@ -845,14 +849,16 @@ return view.extend({
 						String.format('%s %s', _('Example for IPv6'), ': http://checkipv6.dyndns.com'));
 					o.depends("ip_source", "web")
 					o.modalonly = true;
+					o.rmempty = false;
 
 					o = s.taboption('advanced', widgets.DeviceSelect, 'ip_interface',
 						_("Interface"),
 						_("Defines the interface to read systems IP-Address from"));
 					o.modalonly = true;
+					o.noaliases = true;
 					o.depends("ip_source", "interface")
 					o.multiple = false;
-					o.default = 'wan';
+					o.default = 'eth0';
 
 					o = s.taboption('advanced', form.Value, 'ip_script',
 						_("Script"),
@@ -861,11 +867,12 @@ return view.extend({
 					o.depends("ip_source", "script")
 					o.placeholder = "/path/to/script.sh"
 
-					o = s.taboption('advanced', widgets.DeviceSelect, 'interface',
+					o = s.taboption('advanced', widgets.NetworkSelect, 'interface',
 						_("Event Network"),
 						_("Network on which the ddns-updater scripts will be started"));
 					o.modalonly = true;
 					o.multiple = false;
+					o.rmempty = false;
 					o.default = 'wan';
 					o.depends("ip_source", "web");
 					o.depends("ip_source", "script");
@@ -887,11 +894,9 @@ return view.extend({
 					};
 
 					if (env['has_bindnet']) {
-						o = s.taboption('advanced', widgets.ZoneSelect, 'bind_network',
+						o = s.taboption('advanced', widgets.NetworkSelect, 'bind_network',
 							_("Bind Network"),
-							_('OPTIONAL: Network to use for communication')
-							+ '<br />' +
-							_("Network on which the ddns-updater scripts will be started"));
+							_('OPTIONAL: Network to use for communication'));
 						o.depends("ip_source", "web");
 						o.optional = true;
 						o.rmempty = true;
@@ -1159,7 +1164,7 @@ return view.extend({
 				return Promise.all([
 					this.callDDnsGetServicesStatus(),
 					this.callDDnsGetStatus()
-				]).then(L.bind(this.poll_status, this, nodes));
+				]).then(L.bind(this.poll_status, this, nodes, resolved));
 			}, this), 5);
 			return nodes;
 		}, this, m));
