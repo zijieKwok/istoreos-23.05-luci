@@ -3940,6 +3940,13 @@ var UI = baseclass.extend(/** @lends LuCI.ui.prototype */ {
 	 */
 	awaitReconnect: function(/* ... */) {
 		var ipaddrs = arguments.length ? arguments : [ window.location.host ];
+		var deduplicated = [];
+		ipaddrs.forEach(function(e){
+			if (deduplicated.indexOf(e) == -1) {
+				deduplicated.push(e);
+			}
+		});
+		ipaddrs = deduplicated;
 
 		window.setTimeout(L.bind(function() {
 			poll.add(L.bind(function() {
