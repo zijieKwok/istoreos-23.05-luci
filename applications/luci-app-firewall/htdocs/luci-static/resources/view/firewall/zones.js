@@ -280,7 +280,8 @@ return view.extend({
 		o.modalonly = true;
 
 		o = s.taboption('conntrack', form.Flag, 'auto_helper', _('Automatic helper assignment'), _('Automatically assign conntrack helpers based on traffic protocol and port'));
-		o.default = o.enabled;
+		o.default = '0';
+		o.rmempty = false;
 		o.modalonly = true;
 
 		o = s.taboption('conntrack', form.MultiValue, 'helper', _('Conntrack helpers'), _('Explicitly choses allowed connection tracking helpers for zone traffic'));
