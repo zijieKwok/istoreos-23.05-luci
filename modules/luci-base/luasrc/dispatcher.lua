@@ -338,12 +338,12 @@ local function tree_to_json(node, json)
 				if subnode.sysauth_authenticator == "htmlauth" then
 					spec.auth = {
 						login = true,
-						methods = { "cookie:sysauth" }
+						methods = { "cookie:sysauth_https", "cookie:sysauth_http" }
 					}
 				elseif subname == "rpc" and subnode.module == "luci.controller.rpc" then
 					spec.auth = {
 						login = false,
-						methods = { "query:auth", "cookie:sysauth" }
+						methods = { "query:auth", "cookie:sysauth_https", "cookie:sysauth_http" }
 					}
 				elseif subnode.module == "luci.controller.admin.uci" then
 					spec.auth = {
@@ -903,7 +903,8 @@ function dispatch(request)
 				return tpl.render("sysauth", scope)
 			end
 
-			http.header("Set-Cookie", 'sysauth=%s; path=%s; SameSite=Strict; HttpOnly%s' %{
+			http.header("Set-Cookie", 'sysauth_%s=%s; path=%s; SameSite=Strict; HttpOnly%s' %{
+				http.getenv("HTTPS") == "on" and "https" or "http",
 				sid, build_url(), http.getenv("HTTPS") == "on" and "; secure" or ""
 			})
 
