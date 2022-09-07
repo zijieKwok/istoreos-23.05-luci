@@ -257,13 +257,7 @@ function check_uci_depends_section(conf, sect) {
 function check_uci_depends(conf) {
 	for (let config, values in conf) {
 		if (values == true) {
-			let found = false;
-
-			uci.load(config);
-			uci.foreach(config, null, () => { found = true });
-
-			if (!found)
-				return false;
+			return uci.load(config);
 		}
 		else if (type(values) == 'object') {
 			if (!check_uci_depends_section(config, values))
