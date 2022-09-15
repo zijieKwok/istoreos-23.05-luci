@@ -8594,5 +8594,11 @@ msgstr ""
 msgid "« Back"
 msgstr "« Back"
 
+msgid "Port-based Anonymous Mount"
+msgstr "Port-based Anonymous Mount"
+
+msgid "Mount filesystems not specifically configured, mount point based on connected port"
+msgstr "Mount filesystems not specifically configured, mount point based on connected port"
+
 #~ msgid "MAC-Address Filter"
 #~ msgstr "MAC-Address Filter"

@@ -8744,6 +8744,12 @@ msgstr "CNAME记录"
 msgid "Target hostname"
 msgstr "目标主机名"
 
+msgid "Port-based Anonymous Mount"
+msgstr "基于端口的自动挂载"
+
+msgid "Mount filesystems not specifically configured, mount point based on connected port"
+msgstr "自动挂载未专门配置的分区，以连接的端口生成挂载点"
+
 #~ msgid "Enable promiscious mode"
 #~ msgstr "启用混杂模式"
 
