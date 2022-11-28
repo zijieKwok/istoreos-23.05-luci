@@ -586,6 +586,19 @@ local function check_authentication(method)
 	return session_retrieve(sid)
 end
 
+function is_authenticated(auth)
+	if type(auth) == "table" and type(auth.methods) == "table" and #auth.methods > 0 then
+		local sid, sdat, sacl
+		for _, method in ipairs(auth.methods) do
+			sid, sdat, sacl = check_authentication(method)
+
+			if sid and sdat and sacl then
+				return sid, sdat, sacl
+			end
+		end
+	end
+end
+
 local function get_children(node)
 	local children = {}
 
