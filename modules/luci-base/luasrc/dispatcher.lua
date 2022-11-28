@@ -867,14 +867,7 @@ function dispatch(request)
 	ctx.requested = ctx.requested or page
 
 	if type(auth) == "table" and type(auth.methods) == "table" and #auth.methods > 0 then
-		local sid, sdat, sacl
-		for _, method in ipairs(auth.methods) do
-			sid, sdat, sacl = check_authentication(method)
-
-			if sid and sdat and sacl then
-				break
-			end
-		end
+		local sid, sdat, sacl = is_authenticated(auth)
 
 		if not (sid and sdat and sacl) and auth.login then
 			local user = http.getenv("HTTP_AUTH_USER")
