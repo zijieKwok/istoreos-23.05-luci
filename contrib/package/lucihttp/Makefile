@@ -38,6 +38,7 @@ TARGET_CFLAGS += -I$(STAGING_DIR)/usr/include
 CMAKE_OPTIONS += \
 	-DLUAPATH=/usr/lib/lua \
 	-DBUILD_LUA=$(if $(CONFIG_PACKAGE_liblucihttp-lua),ON,OFF) \
+	-DBUILD_UCODE=OFF \
 	-DBUILD_TESTS=OFF
 
 define Build/InstallDev
