@@ -155,7 +155,7 @@ function compile_datatype(code)
 						:gsub("%s+$", "")
 
 					if #label > 0 and tonumber(label) then
-						stack[#stack+1] = tonumber(label)
+						stack[#stack+1] = label
 					elseif label:match("^'.*'$") or label:match('^".*"$') then
 						stack[#stack+1] = label:gsub("[\"'](.*)[\"']", "%1")
 					elseif type(datatypes[label]) == "function" then
