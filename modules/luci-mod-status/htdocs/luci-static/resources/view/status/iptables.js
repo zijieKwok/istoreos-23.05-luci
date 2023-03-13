@@ -252,7 +252,11 @@ return view.extend({
 		    elem = document.getElementById('rule_%s_%s'.format(table.toLowerCase(), chain));
 
 		if (elem) {
-			(document.documentElement || document.body.parentNode || document.body).scrollTop = elem.offsetTop - 40;
+			if (elem.scrollIntoView) {
+				elem.scrollIntoView();
+			} else {
+				(document.documentElement || document.body.parentNode || document.body).scrollTop = elem.offsetTop - 40;
+			}
 			elem.classList.remove('flash');
 			void elem.offsetWidth;
 			elem.classList.add('flash');
@@ -319,7 +323,7 @@ return view.extend({
 				'.cbi-tooltip-container, span.jump { border-bottom:1px dotted #00f;cursor:pointer }',
 				'ul { list-style:none }',
 				'.references { position:relative }',
-				'.references .cbi-tooltip { left:0!important;top:1.5em!important }',
+				'.references .cbi-tooltip { left:0!important;top:1.5em!important;pointer-events:inherit!important; }',
 				'h4>span { font-size:90% }'
 			]),
 
