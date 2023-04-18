@@ -119,6 +119,8 @@ var action_translations = {
 
 	'masquerade': _('Rewrite to egress device address'),
 
+	'fullcone': _('Rewrite to egress device address') + " (Fullcone NAT)",
+
 	'mangle': _('Set header field <var>%s</var> to <strong>%s</strong>', 'nft mangle'),
 
 	'limit': _('At most <strong>%h</strong> per <strong>%h</strong>, burst of <strong>%h</strong>'),
@@ -153,6 +155,7 @@ return view.extend({
 				case 'redirect':
 				case 'mangle':
 				case 'masquerade':
+				case 'fullcone':
 				case 'return':
 				case 'flow':
 				case 'log':
@@ -413,6 +416,12 @@ return view.extend({
 		case 'masquerade':
 			return E('span', { 'class': 'ifacebadge' }, [
 				E('span', action_translations.masquerade),
+				this.renderNatFlags(spec)
+			]);
+
+		case 'fullcone':
+			return E('span', { 'class': 'ifacebadge' }, [
+				E('span', action_translations.fullcone),
 				this.renderNatFlags(spec)
 			]);
 
