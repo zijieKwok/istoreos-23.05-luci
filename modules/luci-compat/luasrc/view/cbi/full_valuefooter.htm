@@ -3,6 +3,7 @@
 				not luci.util.instanceof(self, luci.cbi.Flag) 
 				and not luci.util.instanceof(self, luci.cbi.Value)
 				and not luci.util.instanceof(self, luci.cbi.ListValue)
+				and not luci.util.instanceof(self, luci.cbi.StaticList)
 				or self.orientation == "horizontal") then -%>
 				<br />
 			<%- end %>
