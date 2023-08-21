@@ -155,9 +155,14 @@ function read_jsonfile(path, defval) {
 
 function read_cachefile(file, reader) {
 	let euid = getuid(),
+	    now = time(),
 	    fstat = stat(file),
+	    mtime = fstat?.mtime,
 	    fuid = fstat?.uid,
 	    perm = fstat?.perm;
+
+	if (mtime == null || mtime > now || mtime + 5 < now)
+	    return null;
 
 	if (euid != fuid ||
 	    perm?.group_read || perm?.group_write || perm?.group_exec ||
