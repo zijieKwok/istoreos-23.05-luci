@@ -548,19 +548,27 @@ msgstr "内存使用率"
 
 #: applications/luci-app-dockerman/luasrc/model/cbi/dockerman/newcontainer.lua:630
 msgid ""
-"Memory limit (format: <number>[<unit>]). Number is a positive integer. Unit "
-"can be one of b, k, m, or g. Minimum is 4M"
+"Memory limit (format: &lt;number&gt;[&lt;unit&gt;]). Number is a positive "
+"integer. Unit can be one of b, k, m, or g. Minimum is 4M"
 msgstr ""
-"内存限制 (格式:<数字>[<单位>])。数字是正整数。单位可以是 b、k、m 或 g 之一。"
+"内存限制 (格式:&lt;数字&gt;[&lt;单位&gt;])。数字是正整数。单位可以是 b、k、m 或 g 之一。"
 "最小值为 4M"
+
+#: applications/luci-app-dockerman/luasrc/model/cbi/dockerman/container.lua:589
+msgid ""
+"Memory limit (format: &lt;number&gt;[&lt;unit&gt;]). Number is a positive "
+"integer. Unit can be one of b, k, m, or g. Minimum is 4M. Must less than Total Memory"
+msgstr ""
+"内存限制 (格式:&lt;数字&gt;[&lt;单位&gt;])。数字是正整数。单位可以是 b、k、m 或 g 之一。"
+"最小值为 4M。必须小于总内存"
 
 #: applications/luci-app-dockerman/luasrc/model/cbi/dockerman/container.lua:582
 msgid ""
-"Memory limit (format: <number>[<unit>]). Number is a positive integer. Unit "
-"can be one of b, k, m, or g. Minimum is 4M."
+"Memory + Swap limit (format: &lt;number&gt;[&lt;unit&gt;]). Number is a "
+"positive integer. Unit can be one of b, k, m, or g. Minimum is 4M. -1 means unlimited."
 msgstr ""
-"内存限制 (格式:<数字>[<单位>])。数字是正整数。单位可以是 b、k、m 或 g 之一。"
-"最小值为 4M。"
+"内存+交换区限制 (格式:&lt;数字&gt;[&lt;单位&gt;])。数字是正整数。单位可以是 b、k、m 或 g 之一。"
+"最小值为 4M。-1 表示无限制"
 
 #: applications/luci-app-dockerman/luasrc/model/cbi/dockerman/newnetwork.lua:47
 msgid "Mode"
