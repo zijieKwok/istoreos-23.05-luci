@@ -409,47 +409,47 @@ msgstr "公測數"
 #: applications/luci-app-mwan3/root/usr/share/luci/menu.d/luci-app-mwan3.json:3
 #: applications/luci-app-mwan3/root/usr/share/luci/menu.d/luci-app-mwan3.json:46
 msgid "MultiWAN Manager"
-msgstr "MultiWAN 管理器"
+msgstr "負載均勻"
 
 #: applications/luci-app-mwan3/htdocs/luci-static/resources/view/mwan3/status/diagnostics.js:79
 msgid "MultiWAN Manager - Diagnostics"
-msgstr "MultiWAN 管理器 - 診斷"
+msgstr "負載均勻 - 診斷"
 
 #: applications/luci-app-mwan3/htdocs/luci-static/resources/view/mwan3/network/globals.js:10
 msgid "MultiWAN Manager - Globals"
-msgstr "MultiWAN 管理器 - 全域"
+msgstr "負載均勻 - 全域"
 
 #: applications/luci-app-mwan3/htdocs/luci-static/resources/view/mwan3/network/interface.js:20
 msgid "MultiWAN Manager - Interfaces"
-msgstr "MultiWAN 管理器 - 介面"
+msgstr "負載均勻 - 介面"
 
 #: applications/luci-app-mwan3/htdocs/luci-static/resources/view/mwan3/network/member.js:16
 msgid "MultiWAN Manager - Members"
-msgstr "MultiWAN 管理器 - 成員"
+msgstr "負載均勻 - 成員"
 
 #: applications/luci-app-mwan3/htdocs/luci-static/resources/view/mwan3/network/notify.js:26
 msgid "MultiWAN Manager - Notify"
-msgstr "MultiWAN 管理器 - 通知"
+msgstr "負載均勻 - 通知"
 
 #: applications/luci-app-mwan3/htdocs/luci-static/resources/view/mwan3/status/overview.js:92
 msgid "MultiWAN Manager - Overview"
-msgstr "MultiWAN 管理器 - 概覽"
+msgstr "負載均勻 - 概覽"
 
 #: applications/luci-app-mwan3/htdocs/luci-static/resources/view/mwan3/network/policy.js:16
 msgid "MultiWAN Manager - Policies"
-msgstr "MultiWAN 管理器 - 策略"
+msgstr "負載均勻 - 策略"
 
 #: applications/luci-app-mwan3/htdocs/luci-static/resources/view/mwan3/network/rule.js:18
 msgid "MultiWAN Manager - Rules"
-msgstr "MultiWAN 管理器 - 規則"
+msgstr "負載均勻 - 規則"
 
 #: applications/luci-app-mwan3/htdocs/luci-static/resources/view/mwan3/status/detail.js:12
 msgid "MultiWAN Manager - Status"
-msgstr "MultiWAN 管理器 - 狀態"
+msgstr "負載均勻 - 狀態"
 
 #: applications/luci-app-mwan3/htdocs/luci-static/resources/view/mwan3/status/troubleshooting.js:12
 msgid "MultiWAN Manager - Troubleshooting"
-msgstr "MultiWAN 管理器 - 故障排除"
+msgstr "負載均勻 - 故障排除"
 
 #: applications/luci-app-mwan3/htdocs/luci-static/resources/view/mwan3/network/interface.js:21
 msgid ""
