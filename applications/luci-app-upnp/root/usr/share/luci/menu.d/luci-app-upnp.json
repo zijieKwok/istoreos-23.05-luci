@@ -1,5 +1,5 @@
 {
-	"admin/services/upnp": {
+	"admin/nas/upnp": {
 		"title": "UPnP",
 		"action": {
 			"type": "view",
